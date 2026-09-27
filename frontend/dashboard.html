@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Account | ShopEase</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            background: #f7f6f2;
+
+            color: #111;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        .top {
+            background: #111;
+
+            color: #fff;
+
+            text-align: center;
+
+            padding: 10px;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+        }
+
+
+        .nav {
+            height: 86px;
+
+            border-bottom:
+                1px solid #dedbd3;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            padding: 0 6vw;
+        }
+
+
+        .brand {
+            font-family: Georgia, serif;
+
+            font-size: 25px;
+
+            letter-spacing: 5px;
+        }
+
+
+        .links {
+            display: flex;
+
+            gap: 28px;
+
+            align-items: center;
+        }
+
+
+        .links a,
+        .logout {
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        .logout {
+            border: 0;
+
+            background: none;
+
+            cursor: pointer;
+
+            color: #111;
+        }
+
+
+        .main {
+            max-width: 1180px;
+
+            margin: auto;
+
+            padding:
+                90px
+                6vw;
+        }
+
+
+        .eyebrow {
+            font-size: 9px;
+
+            letter-spacing: 2.5px;
+
+            color: #777;
+
+            margin-bottom: 18px;
+        }
+
+
+        h1 {
+            font-family: Georgia, serif;
+
+            font-size:
+                clamp(
+                    55px,
+                    8vw,
+                    92px
+                );
+
+            line-height: .9;
+
+            font-weight: 400;
+
+            letter-spacing: -3px;
+        }
+
+
+        h1 em {
+            font-style: italic;
+        }
+
+
+        .intro {
+            max-width: 580px;
+
+            margin-top: 25px;
+
+            color: #666;
+
+            font-size: 13px;
+
+            line-height: 1.9;
+        }
+
+
+        .actions {
+            display: flex;
+
+            gap: 15px;
+
+            margin-top: 35px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .button {
+            padding:
+                16px
+                24px;
+
+            background: #111;
+
+            color: #fff;
+
+            font-size: 9px;
+
+            letter-spacing: 1.8px;
+        }
+
+
+        .button.alt {
+            background: transparent;
+
+            color: #111;
+
+            border:
+                1px solid #111;
+        }
+
+
+        .grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 1px;
+
+            background: #d9d6cf;
+
+            margin-top: 70px;
+
+            border:
+                1px solid #d9d6cf;
+        }
+
+
+        .card {
+            background: #f7f6f2;
+
+            padding: 30px;
+        }
+
+
+        .label {
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            color: #777;
+        }
+
+
+        .value {
+            font-family: Georgia, serif;
+
+            font-size: 42px;
+
+            margin-top: 12px;
+        }
+
+
+        .footer {
+            border-top:
+                1px solid #dedbd3;
+
+            padding:
+                40px 6vw;
+
+            color: #777;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+        }
+
+
+        @media (max-width: 700px) {
+
+            .nav {
+                height: auto;
+
+                padding:
+                    22px
+                    20px;
+
+                align-items:
+                    flex-start;
+            }
+
+
+            .links {
+                gap: 12px;
+
+                flex-wrap: wrap;
+
+                justify-content:
+                    flex-end;
+            }
+
+
+            .main {
+                padding:
+                    65px
+                    20px;
+            }
+
+
+            .grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .footer {
+                padding:
+                    30px
+                    20px;
+
+                display: block;
+            }
+
+
+            .footer span {
+                display: block;
+
+                margin: 8px 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="top">
+
+        COMPLIMENTARY SHIPPING ON ORDERS ABOVE ₹2,999
+
+    </div>
+
+
+
+    <header class="nav">
+
+
+        <a
+            class="brand"
+            href="./index.html"
+        >
+            SHOPEASE
+        </a>
+
+
+        <nav class="links">
+
+
+            <a href="./index.html">
+                SHOP
+            </a>
+
+
+            <a href="./orders.html">
+                ORDERS
+            </a>
+
+
+            <a href="./cart.html">
+                BAG
+                <span id="bag">
+                    0
+                </span>
+            </a>
+
+
+            <button
+                class="logout"
+                id="logout"
+            >
+                LOGOUT
+            </button>
+
+
+        </nav>
+
+
+    </header>
+
+
+
+    <main class="main">
+
+
+        <p class="eyebrow">
+            YOUR SHOPEASE ACCOUNT
+        </p>
+
+
+        <h1>
+            Welcome <em>back.</em>
+        </h1>
+
+
+        <p
+            class="intro"
+            id="welcome"
+        >
+            Your account area is here when
+            you need it. Shopping itself stays
+            on the ShopEase home page.
+        </p>
+
+
+        <div class="actions">
+
+
+            <a
+                class="button"
+                href="./index.html"
+            >
+                CONTINUE SHOPPING
+            </a>
+
+
+            <a
+                class="button alt"
+                href="./orders.html"
+            >
+                VIEW ORDERS
+            </a>
+
+
+        </div>
+
+
+
+        <section class="grid">
+
+
+            <div class="card">
+
+                <p class="label">
+                    YOUR ORDERS
+                </p>
+
+                <p
+                    class="value"
+                    id="orders"
+                >
+                    —
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <p class="label">
+                    BAG ITEMS
+                </p>
+
+                <p
+                    class="value"
+                    id="cart"
+                >
+                    —
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <footer class="footer">
+
+        <span>
+            © 2026 ShopEase
+        </span>
+
+        <span>
+            Fashion · Beauty · Footwear
+        </span>
+
+    </footer>
+
+
+
+    <script>
+
+
+        const API =
+            "http://localhost:5000";
+
+
+        const token =
+            localStorage.getItem(
+                "token"
+            );
+
+
+        /*
+            Dashboard is now an ACCOUNT page.
+
+            It requires login.
+        */
+
+        if (!token) {
+
+            window.location.href =
+                "./login.html";
+
+        }
+
+
+        /* USER NAME */
+
+        try {
+
+            const user =
+                JSON.parse(
+                    localStorage.getItem(
+                        "user"
+                    ) || "null"
+                );
+
+
+            if (
+                user &&
+                user.name
+            ) {
+
+                document.getElementById(
+                    "welcome"
+                ).textContent =
+                    `Welcome back, ${user.name}. Your account area is here when you need it. Shopping itself stays on the ShopEase home page.`;
+
+            }
+
+        } catch {
+
+            /* Ignore invalid user data */
+
+        }
+
+
+        /* BAG COUNT */
+
+        try {
+
+            const cart =
+                JSON.parse(
+                    localStorage.getItem(
+                        "cart"
+                    ) || "[]"
+                );
+
+
+            document.getElementById(
+                "cart"
+            ).textContent =
+                cart.reduce(
+                    (
+                        total,
+                        item
+                    ) => {
+
+                        return (
+                            total +
+                            Math.max(
+                                0,
+                                Number(
+                                    item.quantity
+                                ) || 0
+                            )
+                        );
+
+                    },
+                    0
+                );
+
+
+        } catch {
+
+            document.getElementById(
+                "cart"
+            ).textContent =
+                "0";
+
+        }
+
+
+        /* LOGOUT */
+
+        document
+            .getElementById("logout")
+            .addEventListener(
+                "click",
+                function() {
+
+                    localStorage.removeItem(
+                        "token"
+                    );
+
+                    localStorage.removeItem(
+                        "user"
+                    );
+
+                    window.location.href =
+                        "./login.html";
+
+                }
+            );
+
+
+        /* LOAD ORDERS */
+
+        async function loadAccountData() {
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API}/api/orders`,
+                        {
+                            headers: {
+                                Authorization:
+                                    `Bearer ${token}`
+                            }
+                        }
+                    );
+
+
+                if (
+                    response.status === 401
+                ) {
+
+                    localStorage.removeItem(
+                        "token"
+                    );
+
+                    localStorage.removeItem(
+                        "user"
+                    );
+
+                    window.location.href =
+                        "./login.html";
+
+                    return;
+
+                }
+
+
+                const orders =
+                    await response.json();
+
+
+                document.getElementById(
+                    "orders"
+                ).textContent =
+                    Array.isArray(orders)
+                        ? orders.length
+                        : 0;
+
+            } catch {
+
+                document.getElementById(
+                    "orders"
+                ).textContent =
+                    "0";
+
+            }
+
+        }
+
+
+        loadAccountData();
+
+
+    </script>
+
+
+</body>
+
+</html>

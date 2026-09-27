@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bag | ShopEase</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#f7f6f2;
+    color:#111;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font-family:inherit;
+}
+
+.top-strip{
+    background:#111;
+    color:#fff;
+    text-align:center;
+    padding:10px;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+.nav{
+    height:86px;
+    border-bottom:1px solid #dedbd3;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6vw;
+    background:#f7f6f2;
+}
+
+.brand{
+    font:400 25px Georgia,serif;
+    letter-spacing:5px;
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+    align-items:center;
+}
+
+.nav-links a{
+    font-size:9px;
+    letter-spacing:1.5px;
+}
+
+.bag-count{
+    display:inline-flex;
+    min-width:20px;
+    height:20px;
+    padding:0 6px;
+    border-radius:50%;
+    background:#111;
+    color:#fff;
+    align-items:center;
+    justify-content:center;
+    font-size:9px;
+}
+
+.main{
+    max-width:1450px;
+    margin:auto;
+    padding:85px 6vw 120px;
+}
+
+.eyebrow{
+    font-size:9px;
+    letter-spacing:2.5px;
+    color:#777;
+    margin-bottom:18px;
+}
+
+.title-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:55px;
+}
+
+.title{
+    font:400 clamp(55px,7vw,90px)/.9 Georgia,serif;
+    letter-spacing:-3px;
+}
+
+.count{
+    color:#777;
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+.layout{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 360px;
+    gap:80px;
+    align-items:start;
+}
+
+.items{
+    border-top:1px solid #111;
+}
+
+.item{
+    display:grid;
+    grid-template-columns:150px minmax(0,1fr) auto;
+    gap:25px;
+    padding:25px 0;
+    border-bottom:1px solid #dedbd3;
+}
+
+.image{
+    width:150px;
+    height:190px;
+    object-fit:cover;
+    background:#e2dfd8;
+}
+
+.category{
+    font-size:9px;
+    letter-spacing:1.5px;
+    color:#777;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.name{
+    font:400 23px Georgia,serif;
+}
+
+.price{
+    margin-top:12px;
+    font-size:13px;
+}
+
+/* QUANTITY */
+
+.qty{
+    display:flex;
+    width:108px;
+    height:38px;
+    margin-top:22px;
+    border:1px solid #cfcac0;
+}
+
+.qty button{
+    width:36px;
+    border:0;
+    background:transparent;
+    cursor:pointer;
+    font-size:15px;
+    transition:background .2s ease;
+}
+
+.qty button:hover:not(:disabled){
+    background:#eae8e2;
+}
+
+.qty button:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+}
+
+.qty span{
+    flex:1;
+    display:grid;
+    place-items:center;
+    font-size:11px;
+}
+
+.remove{
+    margin-top:16px;
+    border:0;
+    border-bottom:1px solid #999;
+    background:none;
+    color:#666;
+    font-size:9px;
+    letter-spacing:1.5px;
+    cursor:pointer;
+}
+
+.remove:hover{
+    color:#111;
+    border-color:#111;
+}
+
+.item-total{
+    font-size:13px;
+    padding-top:5px;
+    white-space:nowrap;
+}
+
+.summary{
+    position:sticky;
+    top:25px;
+    background:#ebe9e3;
+    padding:30px;
+}
+
+.summary h2{
+    font:400 29px Georgia,serif;
+    margin-bottom:28px;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid #d3d0c9;
+    font-size:12px;
+}
+
+.row span:first-child{
+    color:#666;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    padding:20px 0;
+    font-size:15px;
+    font-weight:600;
+}
+
+.checkout{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:52px;
+    background:#111;
+    color:#fff;
+    border:1px solid #111;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+.checkout:hover{
+    background:transparent;
+    color:#111;
+}
+
+.continue{
+    display:block;
+    text-align:center;
+    margin-top:22px;
+    color:#555;
+    font-size:9px;
+    letter-spacing:1.5px;
+}
+
+.empty{
+    padding:120px 20px;
+    border-top:1px solid #111;
+    text-align:center;
+}
+
+.empty h2{
+    font:400 48px Georgia,serif;
+}
+
+.empty p{
+    max-width:380px;
+    margin:20px auto 35px;
+    color:#666;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.button{
+    display:inline-flex;
+    padding:15px 25px;
+    background:#111;
+    color:#fff;
+    font-size:9px;
+    letter-spacing:1.8px;
+}
+
+.notice{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#111;
+    color:#fff;
+    padding:15px 20px;
+    font-size:11px;
+    z-index:999;
+}
+
+@media(max-width:850px){
+
+    .nav{
+        height:auto;
+        padding:22px 20px;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        gap:12px;
+        flex-wrap:wrap;
+        justify-content:flex-end;
+    }
+
+    .layout{
+        grid-template-columns:1fr;
+        gap:50px;
+    }
+
+    .summary{
+        position:static;
+    }
+
+    .main{
+        padding:60px 20px 90px;
+    }
+}
+
+@media(max-width:600px){
+
+    .title-row{
+        display:block;
+    }
+
+    .count{
+        display:block;
+        margin-top:20px;
+    }
+
+    .item{
+        grid-template-columns:95px minmax(0,1fr);
+        gap:16px;
+    }
+
+    .image{
+        width:95px;
+        height:130px;
+    }
+
+    .name{
+        font-size:18px;
+    }
+
+    .item-total{
+        grid-column:2;
+    }
+
+    .summary{
+        padding:25px;
+    }
+
+    .empty h2{
+        font-size:38px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="top-strip">
+    COMPLIMENTARY SHIPPING ON ORDERS ABOVE ₹2,999
+</div>
+
+
+<header class="nav">
+
+    <a
+        class="brand"
+        href="./index.html"
+    >
+        SHOPEASE
+    </a>
+
+
+    <nav class="nav-links">
+
+        <a href="./index.html">
+            SHOP
+        </a>
+
+        <a href="./index.html?category=Clothing#products">
+            CLOTHING
+        </a>
+
+        <a href="./index.html?category=Makeup#products">
+            MAKEUP
+        </a>
+
+        <a href="./index.html?category=Shoes#products">
+            SHOES
+        </a>
+
+        <a href="./index.html?category=Heels#products">
+            HEELS
+        </a>
+
+        <a href="./orders.html">
+            ORDERS
+        </a>
+
+        <a href="./cart.html">
+            BAG
+            <span
+                class="bag-count"
+                id="bag-count"
+            >
+                0
+            </span>
+        </a>
+
+        <a
+            href="./dashboard.html"
+            id="account-link"
+        >
+            ACCOUNT
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main class="main">
+
+    <div class="title-row">
+
+        <div>
+
+            <p class="eyebrow">
+                YOUR SELECTION
+            </p>
+
+            <h1 class="title">
+                Your Bag
+            </h1>
+
+        </div>
+
+
+        <p
+            class="count"
+            id="count"
+        >
+            0 ITEMS
+        </p>
+
+    </div>
+
+
+    <div id="cart"></div>
+
+</main>
+
+
+<script>
+
+/* ==============================
+   CART
+============================== */
+
+function getCart(){
+
+    try{
+
+        const cart =
+            JSON.parse(
+                localStorage.getItem("cart") || "[]"
+            );
+
+        return Array.isArray(cart)
+            ? cart
+            : [];
+
+    }catch{
+
+        return [];
+
+    }
+}
+
+
+function saveCart(cart){
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* ==============================
+   PRICE
+============================== */
+
+function money(value){
+
+    return Number(value || 0).toLocaleString(
+        "en-IN",
+        {
+            style:"currency",
+            currency:"INR",
+            maximumFractionDigits:0
+        }
+    );
+
+}
+
+
+/* ==============================
+   SECURITY
+============================== */
+
+function esc(value = ""){
+
+    return String(value).replace(
+        /[&<>\"']/g,
+        character => ({
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            "\"":"&quot;",
+            "'":"&#39;"
+        }[character])
+    );
+
+}
+
+
+/* ==============================
+   SAFE IMAGE
+============================== */
+
+function img(value){
+
+    try{
+
+        const url =
+            new URL(value);
+
+        return [
+            "http:",
+            "https:"
+        ].includes(url.protocol)
+            ? url.href
+            : "";
+
+    }catch{
+
+        return "";
+
+    }
+
+}
+
+
+/* ==============================
+   NOTIFICATION
+============================== */
+
+function notify(message){
+
+    const old =
+        document.querySelector(".notice");
+
+    if(old){
+        old.remove();
+    }
+
+
+    const notification =
+        document.createElement("div");
+
+    notification.className =
+        "notice";
+
+    notification.textContent =
+        message;
+
+    document.body.appendChild(
+        notification
+    );
+
+
+    setTimeout(
+        () => notification.remove(),
+        1600
+    );
+
+}
+
+
+/* ==============================
+   TOTAL ITEMS
+============================== */
+
+function count(){
+
+    return getCart().reduce(
+        (total,item) => {
+
+            return total +
+                Math.max(
+                    0,
+                    Number(item.quantity) || 0
+                );
+
+        },
+        0
+    );
+
+}
+
+
+/* ==============================
+   UPDATE BAG COUNT
+============================== */
+
+function updateCount(){
+
+    const total =
+        count();
+
+
+    document.getElementById(
+        "bag-count"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "count"
+    ).textContent =
+        `${total} ${
+            total === 1
+                ? "ITEM"
+                : "ITEMS"
+        }`;
+
+}
+
+
+/* ==============================
+   CHANGE QUANTITY
+============================== */
+
+function changeQty(id, delta){
+
+    const cart =
+        getCart();
+
+
+    const item =
+        cart.find(
+            product =>
+                String(product._id) ===
+                String(id)
+        );
+
+
+    if(!item){
+        return;
+    }
+
+
+    const currentQuantity =
+        Number(item.quantity) || 1;
+
+
+    const newQuantity =
+        currentQuantity + delta;
+
+
+    /*
+       Never allow quantity below 1.
+    */
+
+    item.quantity =
+        Math.max(
+            1,
+            newQuantity
+        );
+
+
+    saveCart(cart);
+
+
+    /*
+       Re-render everything.
+
+       This updates:
+       - quantity
+       - item total
+       - subtotal
+       - shipping
+       - grand total
+       - bag count
+    */
+
+    render();
+
+}
+
+
+/* ==============================
+   REMOVE ITEM
+============================== */
+
+function removeItem(id){
+
+    const cart =
+        getCart();
+
+
+    const updatedCart =
+        cart.filter(
+            item =>
+                String(item._id) !==
+                String(id)
+        );
+
+
+    saveCart(
+        updatedCart
+    );
+
+
+    notify(
+        "Item removed from your bag."
+    );
+
+
+    render();
+
+}
+
+
+/* ==============================
+   RENDER CART
+============================== */
+
+function render(){
+
+    const cart =
+        getCart();
+
+
+    updateCount();
+
+
+    const container =
+        document.getElementById(
+            "cart"
+        );
+
+
+    /* EMPTY BAG */
+
+    if(cart.length === 0){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <h2>
+                    Your bag is empty.
+                </h2>
+
+                <p>
+                    Discover clothing, beauty and footwear
+                    from the ShopEase collection.
+                </p>
+
+                <a
+                    class="button"
+                    href="./index.html"
+                >
+                    CONTINUE SHOPPING
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    let subtotal = 0;
+
+
+    /* PRODUCTS */
+
+    const itemsHTML =
+        cart.map(item => {
+
+            const quantity =
+                Math.max(
+                    1,
+                    Number(item.quantity) || 1
+                );
+
+
+            const price =
+                Math.max(
+                    0,
+                    Number(item.price) || 0
+                );
+
+
+            const itemTotal =
+                quantity * price;
+
+
+            subtotal +=
+                itemTotal;
+
+
+            const image =
+                img(item.image);
+
+
+            return `
+
+                <article class="item">
+
+                    ${
+                        image
+
+                        ? `
+
+                            <img
+                                class="image"
+                                src="${esc(image)}"
+                                alt="${esc(
+                                    item.name ||
+                                    "Product"
+                                )}"
+                            >
+
+                        `
+
+                        : `
+
+                            <div class="image"></div>
+
+                        `
+                    }
+
+
+                    <div>
+
+                        <p class="category">
+                            ${esc(
+                                item.category ||
+                                "Collection"
+                            )}
+                        </p>
+
+
+                        <h2 class="name">
+                            ${esc(
+                                item.name ||
+                                "Product"
+                            )}
+                        </h2>
+
+
+                        <p class="price">
+                            ${money(price)}
+                        </p>
+
+
+                        <!-- QUANTITY CONTROL -->
+
+                        <div class="qty">
+
+                            <button
+                                type="button"
+                                data-action="minus"
+                                data-id="${esc(item._id)}"
+                                ${
+                                    quantity === 1
+                                        ? "disabled"
+                                        : ""
+                                }
+                                aria-label="Decrease quantity"
+                            >
+                                −
+                            </button>
+
+
+                            <span>
+                                ${quantity}
+                            </span>
+
+
+                            <button
+                                type="button"
+                                data-action="plus"
+                                data-id="${esc(item._id)}"
+                                aria-label="Increase quantity"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+
+                        <button
+                            class="remove"
+                            type="button"
+                            data-action="remove"
+                            data-id="${esc(item._id)}"
+                        >
+                            REMOVE
+                        </button>
+
+                    </div>
+
+
+                    <div class="item-total">
+                        ${money(itemTotal)}
+                    </div>
+
+                </article>
+
+            `;
+
+        }).join("");
+
+
+    /*
+       SHIPPING
+    */
+
+    const shipping =
+        subtotal >= 2999
+            ? 0
+            : 199;
+
+
+    const total =
+        subtotal +
+        shipping;
+
+
+    /* SUMMARY */
+
+    container.innerHTML = `
+
+        <div class="layout">
+
+
+            <section class="items">
+
+                ${itemsHTML}
+
+            </section>
+
+
+            <aside class="summary">
+
+                <h2>
+                    Order summary
+                </h2>
+
+
+                <div class="row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span>
+                        ${money(subtotal)}
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <span>
+                        Shipping
+                    </span>
+
+                    <span>
+                        ${
+                            shipping === 0
+                                ? "FREE"
+                                : money(shipping)
+                        }
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <span>
+                        Complimentary shipping
+                    </span>
+
+                    <span>
+                        ₹2,999+
+                    </span>
+
+                </div>
+
+
+                <div class="total">
+
+                    <span>
+                        TOTAL
+                    </span>
+
+                    <span>
+                        ${money(total)}
+                    </span>
+
+                </div>
+
+
+                <a
+                    class="checkout"
+                    href="./checkout.html"
+                >
+                    PROCEED TO CHECKOUT
+                </a>
+
+
+                <a
+                    class="continue"
+                    href="./index.html"
+                >
+                    CONTINUE SHOPPING
+                </a>
+
+            </aside>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ==============================
+   BUTTON HANDLER
+============================== */
+
+document
+    .getElementById("cart")
+    .addEventListener(
+        "click",
+        function(event){
+
+            const button =
+                event.target.closest(
+                    "button[data-action]"
+                );
+
+
+            if(!button){
+                return;
+            }
+
+
+            const id =
+                button.dataset.id;
+
+
+            const action =
+                button.dataset.action;
+
+
+            if(action === "minus"){
+
+                changeQty(
+                    id,
+                    -1
+                );
+
+            }
+
+
+            if(action === "plus"){
+
+                changeQty(
+                    id,
+                    1
+                );
+
+            }
+
+
+            if(action === "remove"){
+
+                removeItem(
+                    id
+                );
+
+            }
+
+        }
+    );
+
+
+/* ==============================
+   ACCOUNT LINK
+============================== */
+
+document.getElementById(
+    "account-link"
+).href =
+    localStorage.getItem("token")
+        ? "./dashboard.html"
+        : "./login.html";
+
+
+/* ==============================
+   START
+============================== */
+
+render();
+
+</script>
+
+</body>
+
+</html>

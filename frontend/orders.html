@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Orders | ShopEase</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f5f1;
+            color: #111;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* TOP BAR */
+
+        .top-bar {
+            background: #171717;
+            color: white;
+            text-align: center;
+            padding: 9px 20px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* NAVIGATION */
+
+        .navbar {
+            height: 88px;
+            background: #f7f5f1;
+            border-bottom: 1px solid #ddd9d1;
+
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+
+            padding: 0 68px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            justify-self: start;
+        }
+
+        .brand-name {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 28px;
+            letter-spacing: 5px;
+        }
+
+        .brand-subtitle {
+            display: block;
+            margin-top: 5px;
+            font-size: 7px;
+            letter-spacing: 3px;
+            color: #777;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 10px;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.5;
+        }
+
+        .nav-right {
+            justify-self: end;
+            display: flex;
+            align-items: center;
+            gap: 26px;
+        }
+
+        .nav-right a {
+            font-size: 10px;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .bag-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bag-count {
+            width: 21px;
+            height: 21px;
+            border-radius: 50%;
+            background: #171717;
+            color: white;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 10px;
+        }
+
+        /* PAGE HEADER */
+
+        .page-header {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 90px 40px 55px;
+        }
+
+        .eyebrow {
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #777;
+            margin-bottom: 18px;
+        }
+
+        .page-title {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(55px, 7vw, 92px);
+            font-weight: 400;
+            line-height: 0.95;
+            letter-spacing: -4px;
+        }
+
+        .page-description {
+            margin-top: 25px;
+            max-width: 470px;
+            color: #666;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* MAIN */
+
+        .orders-container {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 0 40px 100px;
+        }
+
+        /* ORDER CARD */
+
+        .order-card {
+            background: #fff;
+            border: 1px solid #ddd9d1;
+            margin-bottom: 28px;
+        }
+
+        .order-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            padding: 27px 30px;
+            border-bottom: 1px solid #e3e0da;
+        }
+
+        .order-number-label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #777;
+            margin-bottom: 9px;
+        }
+
+        .order-number {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 20px;
+        }
+
+        .order-date {
+            margin-top: 8px;
+            color: #777;
+            font-size: 12px;
+        }
+
+        .order-status {
+            padding: 9px 15px;
+            border: 1px solid #222;
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* ITEMS */
+
+        .order-items {
+            padding: 0 30px;
+        }
+
+        .order-item {
+            display: grid;
+            grid-template-columns: 92px 1fr auto;
+            align-items: center;
+            gap: 22px;
+
+            padding: 24px 0;
+            border-bottom: 1px solid #e8e5df;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 92px;
+            height: 115px;
+            object-fit: cover;
+            display: block;
+            background: #eee;
+        }
+
+        .item-category {
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .item-name {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 19px;
+            margin-bottom: 9px;
+        }
+
+        .item-quantity {
+            color: #777;
+            font-size: 12px;
+        }
+
+        .item-price {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* ORDER FOOTER */
+
+        .order-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 25px 30px;
+            border-top: 1px solid #e3e0da;
+        }
+
+        .payment-info {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .payment-label {
+            display: block;
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 7px;
+        }
+
+        .order-total {
+            text-align: right;
+        }
+
+        .total-label {
+            display: block;
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .total-value {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 25px;
+        }
+
+        /* EMPTY STATE */
+
+        .empty-orders {
+            background: white;
+            border: 1px solid #ddd9d1;
+            padding: 90px 30px;
+            text-align: center;
+        }
+
+        .empty-orders h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 42px;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .empty-orders p {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 30px;
+        }
+
+        .shop-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #171717;
+            color: white;
+
+            padding: 17px 30px;
+
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            transition: opacity 0.2s ease;
+        }
+
+        .shop-button:hover {
+            opacity: 0.8;
+        }
+
+        /* LOGIN MESSAGE */
+
+        .login-message {
+            background: white;
+            border: 1px solid #ddd9d1;
+            padding: 90px 30px;
+            text-align: center;
+        }
+
+        .login-message h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 42px;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .login-message p {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 30px;
+        }
+
+        /* ERROR */
+
+        .error-message {
+            background: #fff;
+            border: 1px solid #cfc7bf;
+            padding: 25px;
+            color: #8a2c2c;
+            font-size: 13px;
+            display: none;
+            margin-bottom: 25px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #171717;
+            color: white;
+            padding: 70px 68px 35px;
+        }
+
+        .footer-main {
+            max-width: 1250px;
+            margin: 0 auto;
+
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-brand {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 32px;
+            letter-spacing: 5px;
+        }
+
+        .footer-description {
+            margin-top: 18px;
+            max-width: 300px;
+            color: #aaa;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .footer-column h4 {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #aaa;
+            font-size: 11px;
+            margin-bottom: 12px;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1250px;
+            margin: 65px auto 0;
+            padding-top: 22px;
+            border-top: 1px solid #333;
+
+            display: flex;
+            justify-content: space-between;
+
+            color: #777;
+            font-size: 10px;
+        }
+
+        /* LOADING */
+
+        .loading {
+            padding: 80px;
+            text-align: center;
+            color: #777;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1000px) {
+
+            .navbar {
+                padding: 0 30px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links a {
+                font-size: 8px;
+            }
+
+            .nav-right {
+                gap: 15px;
+            }
+
+            .nav-right a {
+                font-size: 8px;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+
+            .navbar {
+                height: auto;
+                min-height: 80px;
+
+                grid-template-columns: 1fr auto;
+                padding: 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-right {
+                gap: 14px;
+            }
+
+            .nav-right a {
+                font-size: 8px;
+            }
+
+            .page-header {
+                padding: 60px 20px 40px;
+            }
+
+            .orders-container {
+                padding: 0 20px 70px;
+            }
+
+            .page-title {
+                font-size: 60px;
+            }
+
+            .order-top {
+                padding: 22px;
+            }
+
+            .order-items {
+                padding: 0 22px;
+            }
+
+            .order-item {
+                grid-template-columns: 70px 1fr;
+                gap: 16px;
+            }
+
+            .item-image {
+                width: 70px;
+                height: 90px;
+            }
+
+            .item-price {
+                grid-column: 2;
+            }
+
+            .order-bottom {
+                padding: 22px;
+                align-items: flex-end;
+            }
+
+            footer {
+                padding: 55px 25px 30px;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP SHIPPING BAR -->
+
+    <div class="top-bar">
+        Complimentary shipping on orders above ₹2,999
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <header class="navbar">
+
+        <a href="./index.html" class="brand">
+            <span class="brand-name">SHOPEASE</span>
+            <span class="brand-subtitle">FASHION · BEAUTY · FOOTWEAR</span>
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="./index.html">New In</a>
+
+            <a href="./index.html?category=Clothing#products">
+                Clothing
+            </a>
+
+            <a href="./index.html?category=Makeup#products">
+                Makeup
+            </a>
+
+            <a href="./index.html?category=Shoes#products">
+                Shoes
+            </a>
+
+            <a href="./index.html?category=Heels#products">
+                Heels
+            </a>
+
+        </nav>
+
+        <div class="nav-right">
+
+            <a href="./dashboard.html">
+                Account
+            </a>
+
+            <a href="./orders.html">
+                Orders
+            </a>
+
+            <a href="./cart.html" class="bag-link">
+                Bag
+                <span class="bag-count" id="bag-count">0</span>
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <div class="eyebrow">
+            Your ShopEase Account
+        </div>
+
+        <h1 class="page-title">
+            Your Orders
+        </h1>
+
+        <p class="page-description">
+            View your purchases, order status and product details
+            all in one place.
+        </p>
+
+    </section>
+
+
+    <!-- ORDERS -->
+
+    <main class="orders-container">
+
+        <div
+            id="error-message"
+            class="error-message">
+        </div>
+
+        <div id="orders-content">
+
+            <div class="loading">
+                Loading your orders...
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-main">
+
+            <div>
+
+                <div class="footer-brand">
+                    ShopEase
+                </div>
+
+                <p class="footer-description">
+                    A curated destination for fashion, beauty
+                    and footwear designed for modern everyday style.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Shop</h4>
+
+                <a href="./index.html">
+                    New In
+                </a>
+
+                <a href="./index.html?category=Clothing#products">
+                    Clothing
+                </a>
+
+                <a href="./index.html?category=Makeup#products">
+                    Makeup
+                </a>
+
+                <a href="./index.html?category=Shoes#products">
+                    Shoes
+                </a>
+
+                <a href="./index.html?category=Heels#products">
+                    Heels
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Account</h4>
+
+                <a href="./dashboard.html">
+                    Account
+                </a>
+
+                <a href="./orders.html">
+                    Orders
+                </a>
+
+                <a href="./cart.html">
+                    Bag
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Help</h4>
+
+                <a href="./index.html">
+                    Customer Care
+                </a>
+
+                <a href="./index.html">
+                    Shipping
+                </a>
+
+                <a href="./index.html">
+                    Returns
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 ShopEase. All rights reserved.
+            </span>
+
+            <span>
+                Fashion · Beauty · Footwear
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        const API_URL = "http://localhost:5000";
+
+        /* -----------------------------
+           BAG COUNT
+        ----------------------------- */
+
+        function updateBagCount() {
+
+            const bagCount =
+                document.getElementById("bag-count");
+
+            let cart = [];
+
+            try {
+
+                cart =
+                    JSON.parse(
+                        localStorage.getItem("cart")
+                    ) || [];
+
+            } catch (error) {
+
+                cart = [];
+
+            }
+
+            const totalItems =
+                cart.reduce(
+                    (total, item) =>
+                        total + Number(item.quantity || 1),
+                    0
+                );
+
+            bagCount.textContent = totalItems;
+        }
+
+
+        /* -----------------------------
+           ESCAPE HTML
+        ----------------------------- */
+
+        function escapeHTML(value) {
+
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        /* -----------------------------
+           SAFE IMAGE
+        ----------------------------- */
+
+        function safeImage(url) {
+
+            if (
+                typeof url === "string" &&
+                /^https?:\/\//i.test(url)
+            ) {
+
+                return url;
+
+            }
+
+            return "";
+        }
+
+
+        /* -----------------------------
+           PRICE
+        ----------------------------- */
+
+        function formatPrice(price) {
+
+            return new Intl.NumberFormat(
+                "en-IN",
+                {
+                    style: "currency",
+                    currency: "INR",
+                    maximumFractionDigits: 0
+                }
+            ).format(Number(price) || 0);
+
+        }
+
+
+        /* -----------------------------
+           DATE
+        ----------------------------- */
+
+        function formatDate(dateValue) {
+
+            const date =
+                new Date(dateValue);
+
+            if (Number.isNaN(date.getTime())) {
+                return "Date unavailable";
+            }
+
+            return date.toLocaleDateString(
+                "en-IN",
+                {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric"
+                }
+            );
+
+        }
+
+
+        /* -----------------------------
+           STATUS
+        ----------------------------- */
+
+        function formatStatus(status) {
+
+            if (!status) {
+                return "Pending";
+            }
+
+            return String(status)
+                .replace(/_/g, " ")
+                .replace(/\b\w/g, letter =>
+                    letter.toUpperCase()
+                );
+
+        }
+
+
+        /* -----------------------------
+           PAYMENT
+        ----------------------------- */
+
+        function formatPayment(method) {
+
+            if (method === "cash_on_delivery") {
+                return "Cash on Delivery";
+            }
+
+            if (method === "online") {
+                return "Online Payment";
+            }
+
+            return "Payment";
+        }
+
+
+        /* -----------------------------
+           SHOW ERROR
+        ----------------------------- */
+
+        function showError(message) {
+
+            const errorBox =
+                document.getElementById("error-message");
+
+            errorBox.textContent =
+                message;
+
+            errorBox.style.display =
+                "block";
+        }
+
+
+        /* -----------------------------
+           LOAD ORDERS
+        ----------------------------- */
+
+        async function loadOrders() {
+
+            const content =
+                document.getElementById(
+                    "orders-content"
+                );
+
+            const token =
+                localStorage.getItem("token");
+
+
+            /*
+                If user isn't logged in,
+                don't show ugly API errors.
+            */
+
+            if (!token) {
+
+                content.innerHTML = `
+
+                    <div class="login-message">
+
+                        <h2>
+                            Sign in to view your orders.
+                        </h2>
+
+                        <p>
+                            Your order history will appear here
+                            after you sign in to your ShopEase account.
+                        </p>
+
+                        <a
+                            href="./login.html"
+                            class="shop-button">
+                            Sign In
+                        </a>
+
+                    </div>
+
+                `;
+
+                return;
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/orders`,
+                        {
+                            headers: {
+                                "Authorization":
+                                    `Bearer ${token}`
+                            }
+                        }
+                    );
+
+
+                /*
+                    Token expired or invalid.
+                */
+
+                if (response.status === 401) {
+
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+
+                    content.innerHTML = `
+
+                        <div class="login-message">
+
+                            <h2>
+                                Your session has expired.
+                            </h2>
+
+                            <p>
+                                Please sign in again to view your orders.
+                            </p>
+
+                            <a
+                                href="./login.html"
+                                class="shop-button">
+                                Sign In
+                            </a>
+
+                        </div>
+
+                    `;
+
+                    return;
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to load your orders."
+                    );
+
+                }
+
+
+                const orders =
+                    Array.isArray(data)
+                        ? data
+                        : data.orders || [];
+
+
+                /* -----------------------------
+                   NO ORDERS
+                ----------------------------- */
+
+                if (orders.length === 0) {
+
+                    content.innerHTML = `
+
+                        <div class="empty-orders">
+
+                            <h2>
+                                No orders yet.
+                            </h2>
+
+                            <p>
+                                Your purchases will appear here
+                                once you place your first order.
+                            </p>
+
+                            <a
+                                href="./index.html"
+                                class="shop-button">
+                                Explore Collection
+                            </a>
+
+                        </div>
+
+                    `;
+
+                    return;
+                }
+
+
+                /* -----------------------------
+                   RENDER ORDERS
+                ----------------------------- */
+
+                content.innerHTML =
+                    orders.map(order => {
+
+                        const items =
+                            Array.isArray(order.items)
+                                ? order.items
+                                : [];
+
+
+                        const orderId =
+                            order._id
+                                ? String(order._id)
+                                : "N/A";
+
+
+                        return `
+
+                            <article class="order-card">
+
+                                <div class="order-top">
+
+                                    <div>
+
+                                        <div class="order-number-label">
+                                            Order
+                                        </div>
+
+                                        <div class="order-number">
+                                            #${escapeHTML(orderId)}
+                                        </div>
+
+                                        <div class="order-date">
+                                            ${formatDate(order.createdAt)}
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="order-status">
+                                        ${escapeHTML(
+                                            formatStatus(
+                                                order.orderStatus
+                                            )
+                                        )}
+                                    </div>
+
+                                </div>
+
+
+                                <div class="order-items">
+
+                                    ${
+                                        items.length
+                                            ? items.map(item => {
+
+                                                const product =
+                                                    item.product || {};
+
+                                                const image =
+                                                    safeImage(
+                                                        product.image
+                                                    );
+
+                                                const productName =
+                                                    product.name ||
+                                                    "Product";
+
+                                                const category =
+                                                    product.category ||
+                                                    "ShopEase";
+
+                                                const quantity =
+                                                    Number(
+                                                        item.quantity || 1
+                                                    );
+
+                                                const price =
+                                                    Number(
+                                                        item.price || 0
+                                                    );
+
+
+                                                return `
+
+                                                    <div class="order-item">
+
+                                                        ${
+                                                            image
+                                                                ? `
+                                                                    <img
+                                                                        class="item-image"
+                                                                        src="${escapeHTML(image)}"
+                                                                        alt="${escapeHTML(productName)}"
+                                                                    >
+                                                                `
+                                                                : `
+                                                                    <div
+                                                                        class="item-image">
+                                                                    </div>
+                                                                `
+                                                        }
+
+
+                                                        <div>
+
+                                                            <div class="item-category">
+                                                                ${escapeHTML(category)}
+                                                            </div>
+
+                                                            <div class="item-name">
+                                                                ${escapeHTML(productName)}
+                                                            </div>
+
+                                                            <div class="item-quantity">
+                                                                Quantity: ${quantity}
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div class="item-price">
+
+                                                            ${formatPrice(price * quantity)}
+
+                                                        </div>
+
+                                                    </div>
+
+                                                `;
+
+                                            }).join("")
+                                            : `
+                                                <div class="loading">
+                                                    No product details available.
+                                                </div>
+                                            `
+                                    }
+
+                                </div>
+
+
+                                <div class="order-bottom">
+
+                                    <div class="payment-info">
+
+                                        <span class="payment-label">
+                                            Payment
+                                        </span>
+
+                                        ${escapeHTML(
+                                            formatPayment(
+                                                order.paymentMethod
+                                            )
+                                        )}
+
+                                    </div>
+
+
+                                    <div class="order-total">
+
+                                        <span class="total-label">
+                                            Total
+                                        </span>
+
+                                        <span class="total-value">
+                                            ${formatPrice(order.totalAmount)}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+
+                        `;
+
+                    }).join("");
+
+
+            } catch (error) {
+
+                console.error(
+                    "Orders error:",
+                    error
+                );
+
+                showError(
+                    error.message ||
+                    "Something went wrong while loading your orders."
+                );
+
+                content.innerHTML = "";
+
+            }
+
+        }
+
+
+        /* -----------------------------
+           START
+        ----------------------------- */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => {
+
+                updateBagCount();
+
+                loadOrders();
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

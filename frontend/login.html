@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | ShopEase</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            background: #f7f6f2;
+
+            color: #111;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        .page {
+            min-height: 100vh;
+
+            display: grid;
+
+            grid-template-columns:
+                1.1fr
+                .9fr;
+        }
+
+
+        .visual {
+            min-height: 100vh;
+
+            background-image:
+                url(
+                    "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=90"
+                );
+
+            background-size: cover;
+
+            background-position: center;
+        }
+
+
+        .panel {
+            display: flex;
+
+            align-items: center;
+
+            padding: 8vw;
+
+            background: #f7f6f2;
+        }
+
+
+        .inner {
+            width: 100%;
+
+            max-width: 430px;
+        }
+
+
+        .brand {
+            font-family: Georgia, serif;
+
+            font-size: 25px;
+
+            letter-spacing: 5px;
+        }
+
+
+        .eyebrow {
+            margin-top: 70px;
+
+            font-size: 9px;
+
+            letter-spacing: 2.5px;
+
+            color: #777;
+        }
+
+
+        .title {
+            margin-top: 18px;
+
+            font-family: Georgia, serif;
+
+            font-size:
+                clamp(
+                    52px,
+                    7vw,
+                    78px
+                );
+
+            line-height: .9;
+
+            font-weight: 400;
+
+            letter-spacing: -3px;
+        }
+
+
+        .title em {
+            font-style: italic;
+        }
+
+
+        .intro {
+            margin-top: 22px;
+
+            color: #666;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+
+        form {
+            margin-top: 40px;
+        }
+
+
+        .field {
+            margin-bottom: 22px;
+        }
+
+
+        label {
+            display: block;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 9px;
+        }
+
+
+        input {
+            width: 100%;
+
+            padding: 14px 0;
+
+            border: 0;
+
+            border-bottom:
+                1px solid #aaa;
+
+            background: transparent;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+
+        input:focus {
+            border-bottom-color: #111;
+        }
+
+
+        button {
+            width: 100%;
+
+            margin-top: 12px;
+
+            padding: 16px;
+
+            background: #111;
+
+            color: #fff;
+
+            border: 1px solid #111;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            transition:
+                background .2s ease,
+                color .2s ease;
+        }
+
+
+        button:hover {
+            background: transparent;
+
+            color: #111;
+        }
+
+
+        button:disabled {
+            opacity: .5;
+
+            cursor: wait;
+        }
+
+
+        .message {
+            min-height: 20px;
+
+            margin-top: 18px;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        .register {
+            margin-top: 25px;
+
+            color: #666;
+
+            font-size: 11px;
+        }
+
+
+        .register a {
+            text-decoration: underline;
+        }
+
+
+        @media (max-width: 800px) {
+
+            .page {
+                grid-template-columns: 1fr;
+            }
+
+
+            .visual {
+                display: none;
+            }
+
+
+            .panel {
+                min-height: 100vh;
+
+                padding:
+                    40px
+                    25px;
+            }
+
+
+            .eyebrow {
+                margin-top: 55px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="page">
+
+
+        <div class="visual"></div>
+
+
+        <main class="panel">
+
+            <div class="inner">
+
+
+                <a
+                    class="brand"
+                    href="./index.html"
+                >
+                    SHOPEASE
+                </a>
+
+
+                <p class="eyebrow">
+                    YOUR ACCOUNT
+                </p>
+
+
+                <h1 class="title">
+                    Sign <em>in.</em>
+                </h1>
+
+
+                <p class="intro">
+                    Sign in once and continue
+                    shopping. Your account stays
+                    available until you choose to
+                    log out.
+                </p>
+
+
+                <form id="login-form">
+
+
+                    <div class="field">
+
+                        <label for="email">
+                            EMAIL
+                        </label>
+
+                        <input
+                            id="email"
+                            type="email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="password">
+                            PASSWORD
+                        </label>
+
+                        <input
+                            id="password"
+                            type="password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        id="submit"
+                        type="submit"
+                    >
+                        SIGN IN
+                    </button>
+
+
+                    <p
+                        id="message"
+                        class="message"
+                    ></p>
+
+
+                </form>
+
+
+                <p class="register">
+
+                    New to ShopEase?
+
+                    <a href="./register.html">
+                        Create an account
+                    </a>
+
+                </p>
+
+
+            </div>
+
+        </main>
+
+
+    </div>
+
+
+    <script>
+
+
+        const API_URL =
+            "http://localhost:5000";
+
+
+        const form =
+            document.getElementById(
+                "login-form"
+            );
+
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        const button =
+            document.getElementById(
+                "submit"
+            );
+
+
+        /*
+            CHECK EXISTING LOGIN
+
+            We only redirect automatically when
+            BOTH token and saved user information
+            exist.
+
+            This prevents an incomplete/stale
+            login state from being treated as
+            a valid session.
+        */
+
+        const existingToken =
+            localStorage.getItem("token");
+
+        const existingUser =
+            localStorage.getItem("user");
+
+
+        if (
+            existingToken &&
+            existingUser
+        ) {
+
+            window.location.href =
+                "./index.html";
+
+        }
+
+
+        /*
+            LOGIN
+        */
+
+        form.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                message.textContent = "";
+
+
+                button.disabled = true;
+
+                button.textContent =
+                    "SIGNING IN…";
+
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${API_URL}/api/users/login`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        email,
+                                        password
+                                    })
+                            }
+                        );
+
+
+                    let data = {};
+
+                    try {
+
+                        data =
+                            await response.json();
+
+                    } catch {
+
+                        data = {};
+
+                    }
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            "Invalid email or password."
+                        );
+
+                    }
+
+
+                    if (!data.token) {
+
+                        throw new Error(
+                            "Login succeeded but no authentication token was returned."
+                        );
+
+                    }
+
+
+                    /*
+                        CLEAR ANY OLD SESSION
+                        BEFORE SAVING THE NEW ONE
+                    */
+
+                    localStorage.removeItem(
+                        "token"
+                    );
+
+                    localStorage.removeItem(
+                        "user"
+                    );
+
+
+                    /*
+                        SAVE NEW SESSION
+                    */
+
+                    localStorage.setItem(
+                        "token",
+                        data.token
+                    );
+
+
+                    if (data.user) {
+
+                        localStorage.setItem(
+                            "user",
+                            JSON.stringify(
+                                data.user
+                            )
+                        );
+
+                    }
+
+
+                    /*
+                        SHOPPING-FIRST FLOW
+
+                        Login sends the customer
+                        directly to the store.
+
+                        Dashboard is NOT required
+                        for shopping.
+                    */
+
+                    window.location.replace(
+                        "./index.html"
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Login error:",
+                        error
+                    );
+
+
+                    message.textContent =
+                        error.message ||
+                        "Unable to sign in. Please try again.";
+
+
+                    message.style.color =
+                        "#8a1f1f";
+
+
+                    button.disabled =
+                        false;
+
+
+                    button.textContent =
+                        "SIGN IN";
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
